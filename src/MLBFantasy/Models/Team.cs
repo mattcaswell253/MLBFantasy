@@ -13,5 +13,13 @@ namespace MLBFantasy.Models
         public string Name { get; set; }
         public string Logo { get; set; }
         public virtual ICollection<Player> Player { get; set; }
+
+        public Team(string name, string logo, int id=0)
+        {
+            Name = name;
+            Logo = logo;
+            TeamId = id;
+        }
+        public Team() { }
     }
 }

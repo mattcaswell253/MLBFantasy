@@ -13,9 +13,16 @@ namespace MLBFantasy.Models
         public virtual DbSet<Player> Players { get; set; }
         public virtual DbSet<Stats> Stats { get; set; }
         public virtual DbSet<Team> Teams { get; set;}
+        public virtual DbSet<DailyPlayerStats> DailyPlayerStats { get; set; }
         public virtual DbSet<PlayerStats> PlayerStats { get; set; }
-        public MLBContext(DbContextOptions options) : base(options)
+        public MLBContext(DbContextOptions<MLBContext> options) 
+            : base(options)
         {
+        }
+        
+        public MLBContext ()
+        {
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)

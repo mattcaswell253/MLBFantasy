@@ -1,37 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Net;
-using System.IO;
-using System.Text;
-using Microsoft.Extensions.DependencyInjection.Extensions;
+using System.Net.Http;
+using RestSharp.Extensions.MonoHttp;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace MLBFantasy.Models
 {
-    
     public class DailyPlayerStats
-    {        
-        private async Task<bool> Request()
+    {
+        public string Day { get; set; }
+        public string RunsBattedIn { get; set; }
+    }
+    static class Program
+    {
+        
+        static void Main()
         {
-            var userName = skarski10;
-            var password = ;
-            string url = https://www.mysportsfeeds.com/api/feed/pull/mlb/2016-regular/daily_player_stats.json?fordate=20161002&playerstats=AB,H,R,HR,ER;
+            MakeRequest();
+            Console.WriteLine("Hit ENTER to exit...");
+            Console.ReadLine();
+        }
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(new Uri(url));
-            request.Headers.Add("Authorization", "Basic " + base64_encode(userName
-            +":" + password));
+        static async void MakeRequest()
+        {
+            var client = new HttpClient();
+            var queryString = HttpUtility.ParseQueryString(string.Empty);
 
-            request.Method = "GET";
+            // Request headers
+            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "4acbaded76264e5aa3168c215df197e4");
 
-            using (WebResponse response = await request.GetResponseAsync())
-            {
-                using (Stream stream = response.GetResponseStream())
-                {
-                    return true;
-                    //process the response
-                }
-            }
+            var uri = "https://api.fantasydata.net/mlb/v2/JSON/PlayerGameStatsByDate/2016-Jul-24?" + queryString;
+
+            var response = await client.GetAsync(uri);
         }
     }
 }
